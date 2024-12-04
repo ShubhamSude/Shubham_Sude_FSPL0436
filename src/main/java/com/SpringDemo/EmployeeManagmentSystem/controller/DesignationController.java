@@ -5,12 +5,12 @@ import com.SpringDemo.EmployeeManagmentSystem.entity.Designation;
 import com.SpringDemo.EmployeeManagmentSystem.service.DesignationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.FOUND;
 
 @RestController
 @RequestMapping("/employeemanagement")
@@ -20,9 +20,14 @@ public class DesignationController {
     DesignationService designationService;
 
     @PostMapping("/addDesignation")
-    public ResponseEntity<Designation> addDesignation(@RequestBody DesignationDto designationDto)
+    public ResponseEntity<Designation> addDataDesignation(@RequestBody DesignationDto designationDto)
     {
-        return new ResponseEntity<>(designationService.addDesignation(designationDto),CREATED);
+        return new ResponseEntity<>(designationService.addDataDesignation(designationDto),CREATED);
     }
 
+    @GetMapping("/getDesignation")
+    public ResponseEntity<List<Designation>> getDesignationData()
+    {
+        return new ResponseEntity<>(designationService.getDesignationData(),FOUND);
+    }
 }
